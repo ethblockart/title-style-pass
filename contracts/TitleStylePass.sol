@@ -1,19 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 // Copyright (C) 2021 adrianleb
 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Affero General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-//
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU Affero General Public License for more details.
-//
-// You should have received a copy of the GNU Affero General Public License
-// along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
 pragma solidity ^0.8.0;
 
 interface TitlesInterface {
@@ -39,7 +26,7 @@ contract TitleStylePass {
     event SupplyUpdated(
         uint256 indexed style,
         uint256 indexed title,
-        uint256 indexed supply
+        uint256 supply
     );
 
     event SupplyUsed(
@@ -92,7 +79,7 @@ contract TitleStylePass {
         );
         require(
             titleSupplyAvailable(style, title),
-            "No supply available for wallet"
+            "No supply available for title"
         );
 
         return true;
@@ -110,7 +97,7 @@ contract TitleStylePass {
         external
         returns (uint256)
     {
-        require(msg.sender == controllerAddr, "Operation not allowed");
+        require(msg.sender == controllerAddr, "Caller not controller");
         styleToTitleSupplyUsed[style][title] += 1;
 
         return styleToTitleSupplyUsed[style][title];
