@@ -28,7 +28,6 @@ interface BlockStyleInterface {
 }
 
 contract TitleStylePass {
-    //Loot Contract
     mapping(uint256 => mapping(uint256 => uint256)) public styleToTitleSupply;
     mapping(uint256 => mapping(uint256 => uint256))
         public styleToTitleSupplyUsed;
@@ -59,7 +58,7 @@ contract TitleStylePass {
         controllerAddr = _controllerAddr;
     }
 
-    /// @dev check if sender owns token
+    /// @dev check if sender owns blockstyle token
     modifier onlyStyleOwner(uint256 style) {
         BlockStyleInterface _styles = BlockStyleInterface(stylesAddr);
         require(msg.sender == _styles.ownerOf(style), "Sender not style owner");
